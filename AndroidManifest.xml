@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.scottlogic.accelerometervisualisation.MainActivity"
+            android:name="com.scottlogic.accelerometervisualisation.AccelerometerActivity"
             android:label="@string/app_name" 
    			android:screenOrientation="portrait" >
             <intent-filter>
