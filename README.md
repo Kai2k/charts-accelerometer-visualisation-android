@@ -19,7 +19,7 @@ In order to build this project you'll need a copy of ShinobiCharts for Android. 
 
 * **Using Android Studio**
 	
-	There are instructions on using ShinobiCharts in Android Studio in [this blog post](http://www.shinobicontrols.com/blog/) (Still to be written!).
+	We don't officially support Android Studio yet, but if you really want to give it a go, have a look at [this blog post](http://www.shinobicontrols.com/blog/posts/2013/12/10/using-shinobicharts-with-android-studio/).
 
 If you're using the trial version you'll need to add your license key. To do so, open up AccelerometerActivity.java and add the following line after the chart has been created (replacing the placeholder with your license key):
 
