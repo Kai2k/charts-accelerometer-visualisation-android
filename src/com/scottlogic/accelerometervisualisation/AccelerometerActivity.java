@@ -58,14 +58,14 @@ public class AccelerometerActivity extends Activity implements SensorEventListen
 		sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		
-		// Only set the chart up the first time the Activity is created
+		// Get the a reference to the ShinobiChart from the ChartFragment
+        ChartFragment chartFragment =
+                (ChartFragment) getFragmentManager().findFragmentById(R.id.chart);
+        shinobiChart = chartFragment.getShinobiChart();
+        
+        // Only set the chart up the first time the Activity is created
         if (savedInstanceState == null) {
-			// Get the a reference to the ShinobiChart from the ChartFragment
-            ChartFragment chartFragment =
-	                (ChartFragment) getFragmentManager().findFragmentById(R.id.chart);
-            shinobiChart = chartFragment.getShinobiChart();
-            
-            // Uncomment this line to set the license key if you're using a trial version
+			// Uncomment this line to set the license key if you're using a trial version
             //shinobiChart.setLicenseKey("<license_key_here>");
 			
             // Set the chart title
@@ -150,17 +150,20 @@ public class AccelerometerActivity extends Activity implements SensorEventListen
 		
 		// event.values for an accelerometer event contains 3 values, one for each of the x, y and z axes
 		for(int i=0; i<3; i++) {
-			// Create a data point for the value, and add it to the relevant DataAdapter
-			DataPoint<Double,Float> dataPoint = new DataPoint<Double,Float>(elapsedTime, event.values[i]);
-			DataAdapter<Double,Float> dataAdapter = dataAdapters.get(i);
-			dataAdapter.add(dataPoint);
-			
-			// Remove any data points from more than 20s ago
-			DataPoint<Double,Float> oldPoint = (DataPoint<Double,Float>) dataAdapter.get(0);
-			while (oldPoint.getX() < elapsedTime - 20)
-			{
-				dataAdapter.remove(0);
-				oldPoint = (DataPoint<Double,Float>) dataAdapter.get(0);
+			// Check we've got a data adapter before attempting to add a point
+			if (dataAdapters != null && dataAdapters.get(i) != null) {
+				// Create a data point for the value, and add it to the relevant DataAdapter
+				DataPoint<Double,Float> dataPoint = new DataPoint<Double,Float>(elapsedTime, event.values[i]);
+				DataAdapter<Double,Float> dataAdapter = dataAdapters.get(i);
+				dataAdapter.add(dataPoint);
+				
+				// Remove any data points from more than 20s ago
+				DataPoint<Double,Float> oldPoint = (DataPoint<Double,Float>) dataAdapter.get(0);
+				while (oldPoint.getX() < elapsedTime - 20)
+				{
+					dataAdapter.remove(0);
+					oldPoint = (DataPoint<Double,Float>) dataAdapter.get(0);
+				}
 			}
 		}
 		
