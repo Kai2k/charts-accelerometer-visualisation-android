@@ -1,6 +1,6 @@
 Plotting Accelerometer Values in ShinobiCharts for Android
 =====================
-This is a demo project that demonstrates how to plot the accelerometer readings from the motion sensor onto a ShinobiChart.
+This is a demo project that demonstrates how to plot the accelerometer readings from the motion sensor onto a ShinobiChart. There's an accompanying blog post [here](http://www.shinobicontrols.com/blog/posts/2014/02/03/building-a-streaming-chart-in-android).
 
 ![Screenshot](screenshot.png?raw=true)
 
